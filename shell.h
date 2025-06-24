@@ -10,6 +10,11 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+
+
+/* Access to environment variables */
+extern char **environ;
+
 /**
  * tokenize - Splits a line into words
  * @line: The input line to split
