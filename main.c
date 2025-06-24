@@ -19,12 +19,6 @@ int main(void)
 		printf("$ ");
 		if (getline(&line, &len, stdin) == -1)
 		{
-			if (feof(stdin))
-			{
-				printf("\n");
-				free(line);
-				exit(0);
-			}
 			perror("getline");
 			free(line);
 			return (1);
