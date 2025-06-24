@@ -19,9 +19,10 @@ int main(void)
 		printf("$ ");
 		if (getline(&line, &len, stdin) == -1)
 		{
-			perror("getline");
+			if (isatty(STDIN_FILENO))
+				printf("\n");
 			free(line);
-			return (1);
+			exit(0);
 		}
 		line[strcspn(line, "\n")] = '\0';
 
