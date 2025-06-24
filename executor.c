@@ -1,0 +1,30 @@
+#include "shell.h"
+
+/**
+ * execute_command - Run a command using fork and execve
+ * @args: Array of command and its arguments
+ *
+ * Forks a child process to run the command.
+ * The parent waits for the child to finish.
+ */
+void execute_command(char **args)
+{
+	pid_t pid = fork();
+
+	if (pid == 0)
+	{
+		if (execve(args[0], args, environ) == -1)
+		{
+			perror("execve");
+			exit(EXIT_FAILURE);
+		}
+	}
+	else if (pid > 0)
+	{
+		wait(NULL);
+	}
+	else
+	{
+		perror("fork");
+	}
+}
