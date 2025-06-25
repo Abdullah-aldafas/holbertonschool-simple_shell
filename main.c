@@ -16,7 +16,8 @@ int main(void)
 
 	while (1)
 	{
-		printf("$ ");
+		if (isatty(STDIN_FILENO))
+			printf("$ ");
 		if (getline(&line, &len, stdin) == -1)
 		{
 			if (isatty(STDIN_FILENO))
