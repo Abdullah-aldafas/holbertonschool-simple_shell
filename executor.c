@@ -7,24 +7,26 @@
  * Forks a child process to run the command.
  * The parent waits for the child to finish.
  */
-void execute_command(char **args)
+int execute_command(char **args)
 {
 	pid_t pid;
 	char *cmd_path;
+	int status;
 
 	if (args[0] == NULL)
-		return;
+		return (0);
 
-	if (strchr(args[0], '/'))
-		cmd_path = args[0];
-	else
-		cmd_path = find_path(args[0]);
+	cmd_path = strchr(args[0], '/') ? args[0] : find_path(args[0]);
 
 	pid = fork();
+	if (pid == -1)
+	{
+		perror("fork");
+		return (1);
+	}
 
 	if (pid == 0)
 	{
-
 		if (cmd_path == NULL)
 		{
 			fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
@@ -36,12 +38,12 @@ void execute_command(char **args)
 			_exit(EXIT_FAILURE);
 		}
 	}
-	else if (pid > 0)
-	{
-		wait(NULL);
-	}
 	else
 	{
-		perror("fork");
+		wait(&status);
+		if (WIFEXITED(status))
+			return WEXITSTATUS(status);
 	}
+
+	return (0);
 }

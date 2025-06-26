@@ -13,6 +13,7 @@ int main(void)
 	char *line = NULL;
 	size_t len = 0;
 	char *args[64];
+	int status;
 
 	while (1)
 	{
@@ -31,7 +32,12 @@ int main(void)
 		if (args[0] == NULL)
 			continue;
 
-		execute_command(args);
+		status = execute_command(args);
+		if (status == 127)
+		{
+			free(line);
+			exit(127);
+		}
 	}
 
 	free(line);

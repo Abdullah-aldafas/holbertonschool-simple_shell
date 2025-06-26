@@ -33,7 +33,7 @@ void tokenize(char *line, char **args);
  * Description: Creates a child process and executes the command
  * using execve. Parent waits for the child to finish.
  */
-void execute_command(char **args);
+int execute_command(char **args);
 
 
 /**
