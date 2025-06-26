@@ -13,7 +13,7 @@ int main(void)
 	char *line = NULL;
 	size_t len = 0;
 	char *args[64];
-	int status;
+	int status = 0;
 
 	while (1)
 	{
