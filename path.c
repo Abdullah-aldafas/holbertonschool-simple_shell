@@ -32,7 +32,7 @@ char *find_path(char *command)
 	static char full_path[1024];
 	char *path_copy, *dir;
 
-	if (path == NULL)
+	if (path == NULL || *path == '\0')
 		return (NULL);
 
 	path_copy = strdup(path);
