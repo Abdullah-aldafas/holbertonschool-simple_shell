@@ -35,7 +35,7 @@ int main(void)
 		if (strcmp(args[0], "exit") == 0)
 		{
 			free(line);
-			exit(0);
+			exit(status);
 		}
 
 		status = execute_command(args);
