@@ -23,7 +23,7 @@ int main(void)
 			if (isatty(STDIN_FILENO))
 				printf("\n");
 			free(line);
-			exit(0);
+			exit(127);
 		}
 		line[strcspn(line, "\n")] = '\0';
 
