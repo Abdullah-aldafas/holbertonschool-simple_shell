@@ -18,6 +18,12 @@ int execute_command(char **args)
 
 	cmd_path = strchr(args[0], '/') ? args[0] : find_path(args[0]);
 
+	if (cmd_path == NULL)
+	{
+		fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
+		return (127);
+	}
+
 	pid = fork();
 	if (pid == -1)
 	{
