@@ -24,6 +24,11 @@ void execute_command(char **args)
 
 	if (pid == 0)
 	{
+		if (cmd_path == NULL)
+		{
+			fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
+			exit(127);
+		}
 
 		if (execve(cmd_path, args, environ) == -1)
 		{
