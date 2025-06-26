@@ -24,7 +24,7 @@ int main(void)
 			if (isatty(STDIN_FILENO))
 				printf("\n");
 			free(line);
-			exit(127);
+			exit(0);
 		}
 		line[strcspn(line, "\n")] = '\0';
 
