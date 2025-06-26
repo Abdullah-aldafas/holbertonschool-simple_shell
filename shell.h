@@ -24,6 +24,8 @@ extern char **environ;
  * This function fills the args array with each word from line.
  */
 void tokenize(char *line, char **args);
+
+
 /**
  * execute_command - Executes a given command
  * @args: Array of command and its arguments
@@ -32,4 +34,23 @@ void tokenize(char *line, char **args);
  * using execve. Parent waits for the child to finish.
  */
 void execute_command(char **args);
+
+
+/**
+ * get_path_from_environ - Gets the value of PATH from environment variables
+ *
+ * Return: Pointer to the value after "PATH=", or NULL if not found
+ */
+char *get_path_from_environ(void);
+
+
+/**
+ * find_path - Looks for a command inside PATH directories
+ * @command: The name of the command (e.g. "ls")
+ *
+ * Return: Full path of the command if found, or NULL if not found
+ */
+char *find_path(char *command);
+
+
 #endif /* SHELL_H */

@@ -9,6 +9,20 @@
  */
 void execute_command(char **args)
 {
+
+	pid_t pid;
+	char *cmd_path;
+
+	if (strchr(args[0], '/'))
+		cmd_path = args[0];
+	else
+		cmd_path = find_path(args[0]);
+
+	if (!cmd_path)
+	{
+		fprintf(stderr, "./hsh: command not found\n");
+		return;
+	}
 	pid_t pid = fork();
 
 	if (pid == 0)
