@@ -32,6 +32,12 @@ int main(void)
 		if (args[0] == NULL)
 			continue;
 
+		if (strcmp(args[0], "exit") == 0)
+		{
+			free(line);
+			exit(0);
+		}
+
 		status = execute_command(args);
 		if (status == 127)
 		{
