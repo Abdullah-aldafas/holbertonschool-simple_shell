@@ -30,8 +30,16 @@ int main(void)
 		tokenize(line, args);
 		if (args[0] == NULL)
 			continue;
+
+		if (strchr(args[0], '/') == NULL && find_path(args[0]) == NULL)
+		{
+			fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
+			exit(127);
+		}
+
 		execute_command(args);
 	}
+
 	free(line);
 	return (0);
 }
