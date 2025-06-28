@@ -56,4 +56,20 @@ char *get_path_from_environ(void);
 char *find_path(char *command);
 
 
+/**
+ * split_line - Splits a line of input into an array of tokens (words)
+ * @line: The input string from the user
+ *
+ * Return: A NULL-terminated array of strings (tokens/arguments)
+ */
+char **split_line(char *line);
+
+/**
+ * execute - Executes a command using execvp
+ * @args: A NULL-terminated array of arguments (e.g. {"ls", "-l", NULL})
+ *
+ * Description: Creates a child process to execute the given command.
+ */
+void execute(char **args);
+
 #endif /* SHELL_H */
