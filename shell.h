@@ -10,6 +10,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <ctype.h>
 
 
 /* Access to environment variables */
