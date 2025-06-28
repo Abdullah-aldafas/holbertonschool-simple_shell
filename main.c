@@ -27,25 +27,27 @@ int main(void)
 			exit(0);
 		}
 		line[strcspn(line, "\n")] = '\0';
-
 		tokenize(line, args);
 		if (args[0] == NULL)
 			continue;
-
 		if (strcmp(args[0], "exit") == 0)
 		{
 			free(line);
 			exit(status);
 		}
-
-		status = execute_command(args);
-		if (status == 127)
+		if (strcmp(args[0], "env") == 0)
 		{
-			free(line);
-			exit(127);
-		}
-	}
+			int i = 0;
 
+			while (environ[i])
+			{
+				printf("%s\n", environ[i]);
+				i++;
+			}
+			continue;
+		}
+		status = execute_command(args);
+	}
 	free(line);
 	return (0);
 }
