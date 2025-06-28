@@ -1,53 +1,39 @@
 #include "shell.h"
 
 /**
- * execute_command - Run a command using fork and execve
- * @args: Array of command and its arguments
- *
- * Forks a child process to run the command.
- * The parent waits for the child to finish.
- * Return: Exit status of the executed command,
- *         127 if command not found,
- *         1 if fork or execve fails.
+ * execute - Forks and executes the given command
+ * @args: NULL-terminated array of arguments (e.g. {"ls", "-l", NULL})
  */
-int execute_command(char **args)
+void execute(char **args)
 {
 	pid_t pid;
 	char *cmd_path;
-	int status;
 
-	if (args[0] == NULL)
-		return (0);
+	cmd_path = find_path(args[0]);  /* Get full path from PATH */
 
-	cmd_path = strchr(args[0], '/') ? args[0] : find_path(args[0]);
-
-	if (cmd_path == NULL)
+	if (!cmd_path)
 	{
-		fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
-		return (127);
+		fprintf(stderr, "%s: command not found\n", args[0]);
+		return;
 	}
 
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork");
-		return (1);
-	}
+	pid = fork();  /* Create a child process */
 
-	if (pid == 0)
+	if (pid == 0)  /* Child process */
 	{
 		if (execve(cmd_path, args, environ) == -1)
 		{
 			perror("execve");
-			_exit(EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		}
+	}
+	else if (pid > 0)  /* Parent process */
+	{
+		wait(NULL);  /* Wait for child to finish */
+		free(cmd_path);  /* Free command path */
 	}
 	else
 	{
-		wait(&status);
-		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
+		perror("fork");
 	}
-
-	return (0);
 }

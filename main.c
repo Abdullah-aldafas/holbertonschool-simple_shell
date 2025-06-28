@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * main - Entry point for the simple shell
+ * main - Entry point of the simple shell
  *
  * Return: Always 0
  */
@@ -31,11 +31,10 @@ int main(void)
 		if (args[0] != NULL)
 			execute(args);
 
-		for (i = 0; args[i] != NULL; i++)
+		for (i = 0; args[i]; i++)
 			free(args[i]);
 		free(args);
 	}
 
-	free(line);
 	return (0);
 }

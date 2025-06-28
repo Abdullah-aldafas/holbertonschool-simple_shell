@@ -1,69 +1,85 @@
 #include "shell.h"
 
 /**
- * split_line - Tokenizes a given string into words separated by spaces.
- *              This is a custom tokenizer that does not use strtok().
+ * count_letters - Count letters in the current word (token)
+ * @start: Pointer to current position in string
  *
- * @line: The input string to tokenize (e.g., "ls -l /tmp")
- *
- * Return: A NULL-terminated array of strings (tokens).
+ * Return: Length of word
  */
-char **split_line(char *line)
+int count_letters(char *start)
 {
-	int bufsize = 64, i = 0;
-	char **tokens = malloc(bufsize * sizeof(char *));
-	char *start = line, *end;
+	int len = 0;
 
-	if (!tokens)
+	while (start[len] && start[len] != ' ')
+		len++;
+
+	return (len);
+}
+
+/**
+ * add_token - Allocates and copies a token from the input
+ * @tokens: Array of token pointers
+ * @start: Pointer to beginning of token
+ * @len: Length of the token
+ * @index: Current index to store token in array
+ */
+void add_token(char **tokens, char *start, int len, int index)
+{
+	tokens[index] = malloc(len + 1);
+	if (!tokens[index])
 	{
-		perror("allocation error");
+		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
 
-	while (*start != '\0')
+	strncpy(tokens[index], start, len);
+	tokens[index][len] = '\0';
+}
+
+/**
+ * split_line - Splits a line into tokens (no strtok used)
+ * @line: The input line from user
+ *
+ * Return: NULL-terminated array of tokens
+ */
+char **split_line(char *line)
+{
+	int bufsize = 64, i = 0, len;
+	char **tokens;
+	char *start = line;
+
+	tokens = malloc(bufsize * sizeof(char *));
+	if (!tokens)
 	{
-		/* Skip any spaces */
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+
+	while (*start)
+	{
 		while (*start == ' ')
 			start++;
 
 		if (*start == '\0')
 			break;
 
-		/* Find the end of the word */
-		end = start;
-		while (*end != ' ' && *end != '\0')
-			end++;
-
-		int length = end - start;
-
-		/* Allocate memory for the token and copy it */
-		tokens[i] = malloc(length + 1);
-		if (!tokens[i])
-		{
-			perror("allocation error");
-			exit(EXIT_FAILURE);
-		}
-
-		strncpy(tokens[i], start, length);
-		tokens[i][length] = '\0';
+		len = count_letters(start);
+		add_token(tokens, start, len, i);
 		i++;
 
-		/* Move to the next word */
-		start = end;
-
-		/* Resize the token array if needed */
 		if (i >= bufsize)
 		{
 			bufsize += 64;
 			tokens = realloc(tokens, bufsize * sizeof(char *));
 			if (!tokens)
 			{
-				perror("reallocation error");
+				perror("realloc");
 				exit(EXIT_FAILURE);
 			}
 		}
+		start += len;
 	}
 
 	tokens[i] = NULL;
-	return tokens;
+	return (tokens);
 }

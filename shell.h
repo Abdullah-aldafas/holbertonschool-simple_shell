@@ -55,21 +55,15 @@ char *get_path_from_environ(void);
  */
 char *find_path(char *command);
 
+extern char **environ;  /* Environment variables */
 
-/**
- * split_line - Splits a line of input into an array of tokens (words)
- * @line: The input string from the user
- *
- * Return: A NULL-terminated array of strings (tokens/arguments)
- */
+/* Splits the input line into tokens (without using strtok) */
 char **split_line(char *line);
 
-/**
- * execute - Executes a command using execvp
- * @args: A NULL-terminated array of arguments (e.g. {"ls", "-l", NULL})
- *
- * Description: Creates a child process to execute the given command.
- */
+/* Executes the given command by forking and calling execve */
 void execute(char **args);
+
+/* Finds the full path of a command using the PATH environment variable */
+char *find_path(char *command);
 
 #endif /* SHELL_H */
