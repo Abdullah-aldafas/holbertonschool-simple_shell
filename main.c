@@ -1,40 +1,53 @@
 #include "shell.h"
-
 /**
- * main - Entry point of the simple shell
+ * main - Entry point for the shell program
  *
- * Return: Always 0
+ * This function displays a prompt, waits for user input,
+ * reads a line from standard input, tokenizes the input,
+ * and executes the command.
+ *
+ * Return: 0 on success, 1 on error
  */
 int main(void)
 {
 	char *line = NULL;
 	size_t len = 0;
-	ssize_t read;
-	char **args;
-	int i;
+	char *args[64];
+	int status = 0;
 
 	while (1)
 	{
-		printf("$ ");
-
-		read = getline(&line, &len, stdin);
-		if (read == -1)
+		if (isatty(STDIN_FILENO))
+			printf("$ ");
+		if (getline(&line, &len, stdin) == -1)
+		{
+			if (isatty(STDIN_FILENO))
+				printf("\n");
+			free(line);
+			exit(0);
+		}
+		line[strcspn(line, "\n")] = '\0';
+		tokenize(line, args);
+		if (args[0] == NULL)
+			continue;
+		if (strcmp(args[0], "exit") == 0)
 		{
 			free(line);
-			break;
+			exit(status);
 		}
+		if (strcmp(args[0], "env") == 0)
+		{
+			int i = 0;
 
-		line[read - 1] = '\0';
-
-		args = split_line(line);
-
-		if (args[0] != NULL)
-			execute(args);
-
-		for (i = 0; args[i]; i++)
-			free(args[i]);
-		free(args);
+			while (environ[i])
+			{
+				printf("%s\n", environ[i]);
+				i++;
+			}
+			continue;
+		}
+		status = execute_command(args);
 	}
-
+	free(line);
 	return (0);
 }
