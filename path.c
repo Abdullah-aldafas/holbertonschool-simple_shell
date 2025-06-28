@@ -9,6 +9,7 @@
 char *get_path_from_environ(void)
 {
 	int i = 0;
+
 	while (environ[i])
 	{
 		if (strncmp(environ[i], "PATH=", 5) == 0)
@@ -38,7 +39,7 @@ char *find_path(char *command)
 	path_copy = strdup(path);
 
 	if (path_copy == NULL)
-        return (NULL);
+		return (NULL);
 
 	dir = strtok(path_copy, ":");
 

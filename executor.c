@@ -6,6 +6,9 @@
  *
  * Forks a child process to run the command.
  * The parent waits for the child to finish.
+ * Return: Exit status of the executed command,
+ *         127 if command not found,
+ *         1 if fork or execve fails.
  */
 int execute_command(char **args)
 {
@@ -43,7 +46,7 @@ int execute_command(char **args)
 	{
 		wait(&status);
 		if (WIFEXITED(status))
-			return WEXITSTATUS(status);
+			return (WEXITSTATUS(status));
 	}
 
 	return (0);

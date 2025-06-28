@@ -32,6 +32,9 @@ void tokenize(char *line, char **args);
  *
  * Description: Creates a child process and executes the command
  * using execve. Parent waits for the child to finish.
+ * Return: Exit status of the executed command,
+ *         127 if command not found,
+ *         1 if fork or execve fails.
  */
 int execute_command(char **args);
 
