@@ -59,5 +59,5 @@ int main(void)
 		status = execute_command(args);
 	}
 	free(line);
-	return (0);
+	return (status);
 }
