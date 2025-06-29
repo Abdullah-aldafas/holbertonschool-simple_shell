@@ -38,6 +38,7 @@ int main(void)
 				if (!_is_number(args[1]))
 				{
 					fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", args[1]);
+					status = 2;
 					continue;
 				}
 				exit_status = _atoi(args[1]);

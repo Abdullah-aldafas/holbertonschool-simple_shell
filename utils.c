@@ -11,10 +11,8 @@ int _strcmp(char *s1, char *s2)
 int _is_number(char *s)
 {
 	int i = 0;
-	if (s[0] == '-' || s[0] == '+')
-		i++;
-	if (s[i] == '\0')
-		return (0); /* مثل: "+" فقط */
+	if (s[0] == '\0')
+		return (0);
 	while (s[i])
 	{
 		if (s[i] < '0' || s[i] > '9')
