@@ -11,7 +11,7 @@ int _strcmp(char *s1, char *s2)
 int _is_number(char *s)
 {
 	int i = 0;
-	if (s[0] == '-') // دعم الأرقام السالبة
+	if (s[0] == '-')
 		i++;
 	for (; s[i]; i++)
 	{
