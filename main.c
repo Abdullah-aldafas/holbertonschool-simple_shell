@@ -33,19 +33,18 @@ int main(void)
 			continue;
 		if (_strcmp(args[0], "exit") == 0)
 		{
-			int exit_status = status;
 			if (args[1])
 			{
-				if (args[1][0] == '-' || !_is_number(args[1]))
+				if (!_is_number(args[1]))
 				{
 					fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", args[1]);
 					status = 2;
 					continue;
 				}
-				exit_status = _atoi(args[1]);
+				status = _atoi(args[1]);
 			}
 			free(line);
-			exit(exit_status);
+			exit(status);
 		}
 
 
