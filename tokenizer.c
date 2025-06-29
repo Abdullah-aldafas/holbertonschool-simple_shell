@@ -7,7 +7,6 @@
  *
  * This function uses space as the delimiter.
  */
-6:28
 void tokenize(char *line, char **args)
 {
 	char *token;

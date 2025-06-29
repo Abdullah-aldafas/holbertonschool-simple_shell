@@ -37,7 +37,7 @@ int main(void)
 			{
 				char *endptr;
 				exit_status = strtol(args[1], &endptr, 10);
-				if (endptr != '\0') 
+				if (*endptr != '\0') 
 				{
 					fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", args[1]);
 					continue; 
