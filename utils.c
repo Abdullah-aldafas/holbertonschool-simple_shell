@@ -11,13 +11,12 @@ int _strcmp(char *s1, char *s2)
 int _is_number(char *s)
 {
 	int i = 0;
-	if (s[0] == '\0')
-		return (0);
-	while (s[i])
+	if (s[0] == '-') // دعم الأرقام السالبة
+		i++;
+	for (; s[i]; i++)
 	{
 		if (s[i] < '0' || s[i] > '9')
 			return (0);
-		i++;
 	}
 	return (1);
 }
