@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
  * main - Entry point for the shell program
  *
@@ -14,7 +15,6 @@ int main(void)
 	size_t len = 0;
 	char *args[64];
 	int status = 0;
-
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
@@ -32,13 +32,23 @@ int main(void)
 			continue;
 		if (strcmp(args[0], "exit") == 0)
 		{
+			int exit_status = status;
+			if (args[1])
+			{
+				char *endptr;
+				exit_status = strtol(args[1], &endptr, 10);
+				if (endptr != '\0') 
+				{
+					fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", args[1]);
+					continue; 
+				}
+			}
 			free(line);
-			exit(status);
+			exit(exit_status);
 		}
 		if (strcmp(args[0], "env") == 0)
 		{
 			int i = 0;
-
 			while (environ[i])
 			{
 				printf("%s\n", environ[i]);

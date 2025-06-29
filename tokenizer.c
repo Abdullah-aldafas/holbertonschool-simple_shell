@@ -1,28 +1,22 @@
 #include "shell.h"
 
 /**
- * tokenize - Splits a line into tokens without using strtok or isspace
+ * tokenize - Splits a line into words (tokens)
  * @line: The input string to split
  * @args: The array to store the tokens
+ *
+ * This function uses space as the delimiter.
  */
+6:28
 void tokenize(char *line, char **args)
 {
+	char *token;
 	int i = 0;
-	char *start = line;
-	while (*start)
+	token = strtok(line, " ");
+	while (token != NULL)
 	{
-		while (*start && _isspace(*start)) /* <-- بديل isspace */
-			start++;
-		if (*start == '\0')
-			break;
-		args[i++] = start;
-		while (*start && !_isspace(*start))
-			start++;
-		if (*start)
-		{
-			*start = '\0';
-			start++;
-		}
+		args[i++] = token;
+		token = strtok(NULL, " ");
 	}
 	args[i] = NULL;
 }
