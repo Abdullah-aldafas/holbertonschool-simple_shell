@@ -35,7 +35,7 @@ int main(void)
 			int exit_status = status;
 			if (args[1])
 			{
-				if (!_is_number(args[1]))
+				if (args[1][0] == '-' || !_is_number(args[1]))
 				{
 					fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", args[1]);
 					status = 2;
@@ -46,6 +46,11 @@ int main(void)
 			free(line);
 			exit(exit_status);
 		}
+
+
+
+
+
 		if (strcmp(args[0], "env") == 0)
 		{
 			int i = 0;
