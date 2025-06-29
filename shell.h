@@ -57,8 +57,7 @@ char *get_path_from_environ(void);
 char *find_path(char *command);
 
 int _strcmp(char *s1, char *s2);
-void remove_newline(char *s);
-int _strchr_slash(char *s);
-int _isspace(char c);
+int _is_number(char *s);
+int _atoi(char *s);
 
 #endif /* SHELL_H */
