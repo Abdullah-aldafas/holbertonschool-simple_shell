@@ -1,4 +1,11 @@
 #include "shell.h"
+#include <signal.h>
+
+void sigint_handler(int sig)
+{
+	(void)sig;
+	write(STDOUT_FILENO, "\n$ ", 3);
+}
 
 /**
  * main - Entry point for the shell program
@@ -15,6 +22,8 @@ int main(void)
 	size_t len = 0;
 	char *args[64];
 	int status = 0;
+
+	signal(SIGINT, handle_sigint);
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
