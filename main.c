@@ -31,25 +31,11 @@ int main(void)
 		tokenize(line, args);
 		if (args[0] == NULL)
 			continue;
-		if (_strcmp(args[0], "exit") == 0)
+		if (strcmp(args[0], "exit") == 0)
 		{
-			if (args[1])
-			{
-				if (!_is_number(args[1]))
-				{
-					fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", args[1]);
-					status = 2;
-					continue;
-				}
-				status = _atoi(args[1]);
-			}
 			free(line);
 			exit(status);
 		}
-
-
-
-
 
 		if (strcmp(args[0], "env") == 0)
 		{
