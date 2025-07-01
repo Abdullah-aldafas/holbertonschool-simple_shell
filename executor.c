@@ -39,7 +39,7 @@ int execute_command(char **args)
 		if (execve(cmd_path, args, environ) == -1)
 		{
 			perror("execve");
-			_exit(EXIT_FAILURE);
+			_exit(127);
 		}
 	}
 	else
