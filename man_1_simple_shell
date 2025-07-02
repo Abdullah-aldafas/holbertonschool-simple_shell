@@ -1,0 +1,55 @@
+.TH SIMPLE_SHELL 1 "July 2025" "v1.0" "User Commands"
+.SH NAME
+simple_shell \- a basic UNIX command line interpreter
+.SH SYNOPSIS
+.B ./hsh
+.SH DESCRIPTION
+.B simple_shell
+is a simple command line interpreter (shell) that mimics the behavior of the UNIX shell. It accepts commands from the user and executes them, either using built-in commands or through external programs found in the system's PATH.
+
+.SH FEATURES
+.TP
+\- Displays a prompt ($) and waits for the user to type a command.
+.TP
+\- Executes commands found in the PATH.
+.TP
+\- Supports built-in commands such as:
+.RS
+.IP \(bu 2
+.B exit
+\- Exit the shell.
+.IP \(bu
+.B env
+\- Display the current environment variables.
+.RE
+.TP
+\- Handles comments beginning with #
+.TP
+\- Handles command line arguments for
+.B exit
+.SH USAGE
+To start the shell, compile the files and run:
+.PP
+.RS
+gcc -Wall -Werror -Wextra -pedantic *.c -o hsh  
+./hsh
+.RE
+.PP
+Once running, you can type commands like:
+.PP
+.RS
+$ ls  
+$ /bin/ls  
+$ echo "Hello, Shell!"  
+$ exit  
+.RE
+
+.SH AUTHORS
+Abdullah Aldafas
+Sara Ali Mareer
+
+.SH SEE ALSO
+sh(1), bash(1), execve(2), fork(2), getenv(3)
+
+.SH BUGS
+No known bugs at this time.
