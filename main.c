@@ -29,19 +29,29 @@ int main(void)
 			exit(status % 256);
 		}
 
-		line[strcspn(line, "\n")] = '\0';
+
 		if (line && line[0] != '\0')
 		{
 			char *hash = strchr(line, '#');
-			if (hash && (hash == line || *(hash - 1) == ' '))
-				*hash = '\0';
+
+			if (hash)
+			{
+				if (hash == line)
+				{
+					line[0] = '\0';
+				}
+				else if (*(hash - 1) == ' ')
+				{
+					*hash = '\0';
+				}
+			}
 		}
 
-		if (line[0] == '\0' || line[0] == '#')
+		if (line[0] == '\0')
 			continue;
 
 		tokenize(line, args);
-		if (args[0] == NULL || args[0][0] == '#')
+		if (args[0] == NULL)
 			continue;
 
 		if (handle_exit_env(args, line, &status))
