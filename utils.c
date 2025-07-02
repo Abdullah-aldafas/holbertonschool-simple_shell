@@ -25,14 +25,17 @@ int _is_number(char *s)
 {
 	int i = 0;
 
-	if (s[0] == '-' || s[0] == '+')
+	/* Negative numbers are not allowed */
+	if (s[0] == '-')
+		return (0);
+
+	if (s[0] == '+')
 		i++;
 	for (; s[i]; i++)
 		if (s[i] < '0' || s[i] > '9')
 			return (0);
 	return (1);
 }
-
 /**
  * _atoi - Converts a string to integer
  * @s: Input string
