@@ -27,11 +27,16 @@ int main(void)
 			if (isatty(STDIN_FILENO))
 				printf("\n");
 			free(line);
-			exit(status);
+			exit(status % 256);
 		}
 
 		line[strcspn(line, "\n")] = '\0';
-
+		if (line && line[0] != '\0')
+		{
+			char *hash = strchr(line, '#');
+			if (hash && (hash == line || *(hash - 1) == ' '))
+				*hash = '\0';
+		}
 		if (hash && (hash == line || *(hash - 1) == ' '))
 			*hash = '\0';
 
