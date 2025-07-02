@@ -53,6 +53,8 @@ Use the following command to compile all `.c` files:
 ```bash
 gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
+
+
 ---
 
 
