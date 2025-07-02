@@ -34,3 +34,29 @@ Use the following command to compile all `.c` files:
 
 ```bash
 gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+
+---
+
+## 📁 Project Structure
+
+```
+holbertonschool-simple_shell/
+├── main.c              # Main shell loop
+├── shell.h             # Header file with function declarations
+├── builtins.c          # Built-in commands (exit, env)
+├── executor.c          # Command execution logic
+├── tokenizer.c         # Command parsing and tokenization
+├── utils.c             # Utility functions (_strcmp, _atoi, etc.)
+├── path.c              # PATH handling and command search
+├── README.md           # This file
+├── man_1_simple_shell  # Manual page
+└── AUTHORS             # List of contributors
+```
+
+---
+
+## 👥 Authors
+
+- **Abdullah Aldafas** 
+- **Sara Ali Mareer** 
+
