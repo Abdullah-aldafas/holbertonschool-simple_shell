@@ -55,9 +55,6 @@ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
 ---
 
-
-
----
 ## 👥 Authors
 
 - **Abdullah Aldafas** 
