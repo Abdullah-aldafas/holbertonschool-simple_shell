@@ -57,4 +57,17 @@ char *get_path_from_environ(void);
 char *find_path(char *command);
 
 
+
+/**
+ * handle_exit_env - Handles built-in commands: exit and env
+ * @args: Array of command and its arguments
+ * @line: The input line (to free if exiting)
+ * @status: Pointer to status variable to exit with
+ *
+ * Return: 1 if built-in command was handled, 0 otherwise
+ */
+int handle_exit_env(char **args, char *line, int *status);
+
+
+
 #endif /* SHELL_H */

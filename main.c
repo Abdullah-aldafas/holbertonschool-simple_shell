@@ -31,23 +31,8 @@ int main(void)
 		tokenize(line, args);
 		if (args[0] == NULL)
 			continue;
-		if (strcmp(args[0], "exit") == 0)
-		{
-			free(line);
-			exit(status);
-		}
-
-		if (strcmp(args[0], "env") == 0)
-		{
-			int i = 0;
-
-			while (environ[i])
-			{
-				printf("%s\n", environ[i]);
-				i++;
-			}
+		if (handle_exit_env(args, line, &status))
 			continue;
-		}
 		status = execute_command(args);
 	}
 	free(line);
