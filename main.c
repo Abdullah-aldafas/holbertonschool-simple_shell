@@ -15,7 +15,6 @@ int main(void)
 	size_t len = 0;
 	char *args[64];
 	int status = 0;
-	char *hash = strchr(line, '#');
 
 	while (1)
 	{
@@ -37,8 +36,6 @@ int main(void)
 			if (hash && (hash == line || *(hash - 1) == ' '))
 				*hash = '\0';
 		}
-		if (hash && (hash == line || *(hash - 1) == ' '))
-			*hash = '\0';
 
 		if (line[0] == '\0' || line[0] == '#')
 			continue;
