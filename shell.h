@@ -21,5 +21,6 @@ int _strcmp(char *s1, char *s2);
 int _is_number(char *s);
 int _atoi(char *s);
 int handle_exit_env(char **args, char *line, int *status);
+int process_line(char *line, char **args, int *status);
 
 #endif /* SHELL_H */
