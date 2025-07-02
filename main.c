@@ -29,21 +29,14 @@ int main(void)
 			exit(status % 256);
 		}
 
+		line[strcspn(line, "\n")] = '\0';
 
 		if (line && line[0] != '\0')
 		{
 			char *hash = strchr(line, '#');
-
 			if (hash)
 			{
-				if (hash == line)
-				{
-					line[0] = '\0';
-				}
-				else if (*(hash - 1) == ' ')
-				{
-					*hash = '\0';
-				}
+				*hash = '\0';
 			}
 		}
 
