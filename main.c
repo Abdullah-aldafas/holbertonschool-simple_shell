@@ -31,15 +31,25 @@ int main(void)
 
 		line[strcspn(line, "\n")] = '\0';
 
+
 		if (line && line[0] != '\0')
 		{
 			char *hash = strchr(line, '#');
 			if (hash)
 			{
-				*hash = '\0';
+
+				if (hash == line)
+				{
+					line[0] = '\0';
+				}
+
+				else if (*(hash - 1) == ' ')
+				{
+					*hash = '\0';
+				}
+
 			}
 		}
-
 		if (line[0] == '\0')
 			continue;
 
