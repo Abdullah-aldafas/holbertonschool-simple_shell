@@ -63,3 +63,4 @@ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 - **Abdullah Aldafas** 
 - **Sara Ali Mareer** 
 
+---
