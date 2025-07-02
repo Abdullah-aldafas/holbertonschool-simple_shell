@@ -50,7 +50,6 @@ A lightweight command-line interpreter that mimics the basic behavior of the UNI
 
 Use the following command to compile all `.c` files:
 
-```bash
 gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
 ---
