@@ -25,7 +25,7 @@ int handle_exit_env(char **args, char *line, int *status)
 			*status = _atoi(args[1]);
 		}
 		free(line);
-		exit(*status);
+		exit(*status % 256);
 	}
 
 	if (_strcmp(args[0], "env") == 0)
